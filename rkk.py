@@ -2,7 +2,7 @@ import telebot
 import sqlite3
 
 bot = telebot.TeleBot("1879312067:AAHIZKqeV48iwQufOVFJAxGkDoxlSfD_FLk")
-
+#
 global rk1, rk2, rk3
 
 
