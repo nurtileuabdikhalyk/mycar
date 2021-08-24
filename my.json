@@ -1,0 +1,13 @@
+{
+  "researcher": {
+    "name": "Ford Prefect",
+    "species": "Betelgeusian",
+    "relatives": [
+      {
+        "name": "Zaphod Beeblebrox",
+        "likes": 141,
+        "a": "04/08/21"
+      }
+    ]
+  }
+}
