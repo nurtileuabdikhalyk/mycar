@@ -1,0 +1,350 @@
+<!doctype html>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ title }}{% endblock title %}
+{% block content %}
+<html lang="en">
+
+
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+
+
+<div class="site-wrap" id="home-section">
+
+    <div class="site-mobile-menu site-navbar-target">
+        <div class="site-mobile-menu-header">
+            <div class="site-mobile-menu-close mt-3">
+                <span class="icon-close2 js-menu-toggle"></span>
+            </div>
+        </div>
+        <div class="site-mobile-menu-body"></div>
+    </div>
+
+
+    <div class="ftco-blocks-cover-1">
+        <div class="ftco-cover-1 overlay" style="background-image: url({% static 'images/hero_1.jpg' %})">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-5">
+                        <div class="feature-car-rent-box-1">
+                            <h3>Range Rover S7</h3>
+                            <ul class="list-unstyled">
+                                <li>
+                                    <span>Количество дверей</span>
+                                    <span class="spec">4</span>
+                                </li>
+                                <li>
+                                    <span>Количество мест</span>
+                                    <span class="spec">6</span>
+                                </li>
+                                <li>
+                                    <span>Кузов</span>
+                                    <span class="spec">Внедорожник</span>
+                                </li>
+                                <li>
+                                    <span>Трансмиссия</span>
+                                    <span class="spec">Автомат</span>
+                                </li>
+                                <li>
+                                    <span>Минимальный возвраст</span>
+                                    <span class="spec">23</span>
+                                </li>
+                            </ul>
+                            <div class="d-flex align-items-center bg-light p-3">
+                                <span>$150/day</span>
+                                <a href="{% url 'contact' %}" class="ml-auto btn btn-primary">Купить</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="site-section pt-0 pb-0 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+
+                    <form class="trip-form">
+                        <div class="row align-items-center mb-4">
+                            <div class="col-md-6">
+                                <h3 class="m-0">Begin your trip here</h3>
+
+                            </div>
+                            <div class="col-md-6 text-md-right">
+                                <span class="text-primary">{{ vcount }}</span> <span>доступные автомобили</span></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-3">
+                                <label for="cf-1">Where you from</label>
+                                <input type="text" id="cf-1" placeholder="Your pickup address" class="form-control">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="cf-2">Where you go</label>
+                                <input type="text" id="cf-2" placeholder="Your drop-off address" class="form-control">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="cf-3">Journey date</label>
+                                <input type="text" id="cf-3" placeholder="Your pickup address"
+                                       class="form-control datepicker px-3">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="cf-4">Return date</label>
+                                <input type="text" id="cf-4" placeholder="Your pickup address"
+                                       class="form-control datepicker px-3">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <input type="submit" value="Submit" class="btn btn-primary">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="site-section bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <h3>Последние добавленные</h3>
+                    <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure nesciunt nemo vel
+                        earum maxime neque!</p>
+                    <p>
+                        <a href="#" class="btn btn-primary custom-prev">Пред.</a>
+                        <span class="mx-2">/</span>
+                        <a href="#" class="btn btn-primary custom-next">След.</a>
+                    </p>
+                </div>
+                <div class="col-lg-9">
+
+
+                    <div class="nonloop-block-13 owl-carousel">
+                        {% for vehicle in vehicles %}
+                        <div class="item-1">
+                            <a href="#"><img src="{{ vehicle.image.url }}" alt="Image" class="img-fluid"></a>
+                            <!--style="width:400px; height:270px; "-->
+                            <div class="item-1-contents">
+                                <div class="text-center">
+                                    <h3><a href="{% url 'detailcar' vehicle.slug %}">{{ vehicle.name }}</a></h3>
+                                    <div class="rating">
+                                        <span class="icon-star text-warning"></span>
+                                        <span class="icon-star text-warning"></span>
+                                        <span class="icon-star text-warning"></span>
+                                        <span class="icon-star text-warning"></span>
+                                        <span class="icon-star text-warning"></span>
+                                    </div>
+                                </div>
+                                <ul class="specs">
+                                    <li>
+                                        <span>Количество дверей</span>
+                                        <span class="spec">{{ vehicle.doors }}</span>
+                                    </li>
+                                    <li>
+                                        <span>Количество мест</span>
+                                        <span class="spec">{{ vehicle.seats }}</span>
+                                    </li>
+                                    <li>
+                                        <span>Трансмиссия</span>
+                                        <span class="spec">{{ vehicle.transmission }}</span>
+                                    </li>
+                                    <li>
+                                        <span>Минимальный возвраст</span>
+                                        <span class="spec">{{ vehicle.minimum_age }}</span>
+                                    </li>
+                                </ul>
+                                <div class="d-flex action">
+                                    <a href="{% url 'contact' %}" class="btn btn-primary">Купить</a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="site-section section-3" style="background-image: url({% static 'images/service.jpg' %});">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-5">
+                    <h2 class="text-white"><a href="{% url 'services' %}" style="color: #fff;">Наш сервисы</a></h2> <!--href services-->
+                </div>
+            </div>
+            <div class="row">
+                {% for service in services %}
+                <div class="col-lg-4">
+                    <div class="service-1">
+              <span class="service-1-icon">
+<!--                <span class="flaticon-car-1"></span>-->
+                   <span> <img src="{{ service.image.url }}" style="width:50px;height:50px"> </span>
+              </span>
+
+
+                        <div class="service-1-contents">
+                            <h3>{{ service.name }}</h3>
+                            <p>
+                                <!--                            {% autoescape on %}-->
+                                {{ service.description|truncatewords:20 }}
+                                <!--                            {% endautoescape %}-->
+
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="new-section new-section--bg wf-section">
+        <div class="container-new container-new--996">
+            <div class="new-title-second__wrp new-title-second__wrp--home">
+                <h2 data-kz-font="2" class="new-title-second">Как купить машину онлайн?</h2>
+            </div>
+            <div class="buy-online__block">
+                <div class="buy-online__box">
+                    <div class="buy-online__box-text_wrp">
+                        <div class="buy-online__box_sub-title none">Шаг первый</div>
+                        <div class="buy-online__box_img-wrp"><img
+                                src="https://uploads-ssl.webflow.com/5ff58899b60a9e46e0b10859/609cfd2e8ef0cedb7a2366bd_1.svg"
+                                loading="lazy" alt="" class="buy-online__box_img">
+                            <div data-kz-font="2" class="buy-online__box_img-text">Шаг</div>
+                        </div>
+                        <div data-kz-font="2" class="buy-online__box_title">Выбор автомобиля</div>
+                        <div class="buy-online__box_text mw250-buyoonline__box_text">Для этого перейдите в <a
+                                href="{% url 'cars' %}" data-cell-name="step1_catalog" class="buy-online__box_text-link">каталог</a>
+                            и посмотрите наши автомобили
+                        </div>
+                    </div>
+                    <a href="/search-auto" class="buy-online__box-img_wrp w-inline-block"><img
+                            src="https://uploads-ssl.webflow.com/5ff58899b60a9e46e0b10859/609ab6047804edd535dd5a35_home-Illustration%201.svg"
+                            loading="lazy" alt="" class="buy-online__box-img"></a>
+                </div>
+                <div class="buy-online__box buy-online__box--revers">
+                    <div class="buy-online__box-text_wrp">
+                        <div class="buy-online__box_sub-title none">Шаг второй</div>
+                        <div class="buy-online__box_img-wrp"><img
+                                src="https://uploads-ssl.webflow.com/5ff58899b60a9e46e0b10859/609cfd2e626e280e5fef6f77_2.svg"
+                                loading="lazy" alt="" class="buy-online__box_img">
+                            <div data-kz-font="2" class="buy-online__box_img-text">Шаг</div>
+                        </div>
+                        <div data-kz-font="2" class="buy-online__box_title">Способ доставки</div>
+                        <div class="buy-online__box_text">Мы делаем все за вас: получаем гос. номера и тех. паспорт,
+                            оформляем страховку и КАСКО. И, после оформления, привозим ваш автомобиль на эвакуаторе в
+                            удобное для вас место.
+                        </div>
+                    </div>
+                    <div class="buy-online__box-img_wrp"><img
+                            src="https://uploads-ssl.webflow.com/5ff58899b60a9e46e0b10859/609ab632d8f81c400fd55599_home-Illustration%202.svg"
+                            loading="lazy" alt="" class="buy-online__box-img"></div>
+                </div>
+                <div class="buy-online__box">
+                    <div class="buy-online__box-text_wrp">
+                        <div class="buy-online__box_sub-title none">Шаг третий</div>
+                        <div class="buy-online__box_img-wrp"><img
+                                src="https://uploads-ssl.webflow.com/5ff58899b60a9e46e0b10859/609cfd2e1bd456745c3070e3_3.svg"
+                                loading="lazy" alt="" class="buy-online__box_img">
+                            <div data-kz-font="2" class="buy-online__box_img-text">Шаг</div>
+                        </div>
+                        <div data-kz-font="2" class="buy-online__box_title">Купить онлайн</div>
+                        <div class="buy-online__box_text">Оплачивайте или бронируйте автомобиль онлайн при помощи
+                            банковской карты. Если вам нужно кредитование, оформите заявку в карточке автомобиля.
+                        </div>
+                    </div>
+                    <div class="buy-online__box-img_wrp"><img
+                            src="https://uploads-ssl.webflow.com/5ff58899b60a9e46e0b10859/607d54b7180ab9314d3143f0_Illustration%203.svg"
+                            loading="lazy" alt="" class="buy-online__box-img"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="site-section bg-light">
+        <div class="container">
+            <div class="row justify-content-center text-center mb-5">
+                <div class="col-7 text-center mb-5">
+                    <h2>Отзыв клиента</h2>
+                    <p>Отзыв клиента - это рекомендация довольного покупателя, подтверждающая ценность товара или услуги.</p>
+                </div>
+            </div>
+            <div class="row">
+                {% for review in reviews %}
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <div class="testimonial-2">
+                        <blockquote class="mb-4">
+                            <p>{{ review.text }}</p>
+                        </blockquote>
+                        <div class="d-flex v-card align-items-center">
+                            {% if review.image %}
+                            <img src="{{ review.image.url }}" alt="Image" class="img-fluid mr-3">
+                            {% else %}
+
+                            <img src="{% static 'images/nophoto.png' %}" alt="Image" class="img-fluid mr-3">
+                            {% endif %}
+                            <span>{{ review.name }}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="site-section bg-white">
+        <div class="container">
+            <div class="row justify-content-center text-center mb-5">
+                <div class="col-7 text-center mb-5">
+                    <h2>Наш блог</h2>
+                    <p>Веб-сайт, основное содержимое которого — регулярно добавляемые пользователем записи, содержащие текст, изображения или мультимедиа.</p>
+                </div>
+            </div>
+
+            <div class="row">
+                {% for blog in blogs %}
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="post-entry-1 h-100">
+                        <a href="single.html">
+                            <img src="{{ blog.image.url }}" alt="Image"
+                                 class="img-fluid">
+                        </a>
+                        <div class="post-entry-1-contents">
+
+                            <h2><a href="single.html">{{ blog.title }}</a></h2>
+                            <span class="meta d-inline-block mb-3">{{ blog.data }} <span class="mx-2">by</span> <a
+                                    href="#">Admin</a></span>
+                            <p>{{ blog.description|truncatewords:20 }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+</body>
+
+</html>
+{% endblock content %}
+

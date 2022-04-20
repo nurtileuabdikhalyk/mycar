@@ -1,0 +1,103 @@
+<!doctype html>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} {{ title }} {% endblock title %}
+{% block content %}
+
+<html lang="en">
+
+
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+
+
+<div class="site-wrap" id="home-section">
+
+    <div class="site-mobile-menu site-navbar-target">
+        <div class="site-mobile-menu-header">
+            <div class="site-mobile-menu-close mt-3">
+                <span class="icon-close2 js-menu-toggle"></span>
+            </div>
+        </div>
+        <div class="site-mobile-menu-body"></div>
+    </div>
+
+
+    <div class="ftco-blocks-cover-1">
+        <div class="ftco-cover-1 overlay innerpage" style="background-image: url({% static 'images/b.jpg' %})">
+            <div class="container">
+                <div class="row align-items-center justify-content-center">
+                    <div class="col-lg-6 text-center">
+                        <h1>Наш Автомобили</h1>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="site-section bg-light">
+        <div class="container">
+            <div class="row">
+                {% for vehicle in vehicles %}
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="item-1">
+                        <a href="#"><img src="{{ vehicle.image.url }}" alt="Image" class="img-fluid"></a>
+                        <!-- style="width:400px; height:270px;"-->
+                        <div class="item-1-contents">
+                            <div class="text-center">
+                                <h3><a href="{% url 'detailcar' vehicle.slug %}">{{ vehicle.name }}</a></h3>
+                                <div class="rating">
+                                    <span class="icon-star text-warning"></span>
+                                    <span class="icon-star text-warning"></span>
+                                    <span class="icon-star text-warning"></span>
+                                    <span class="icon-star text-warning"></span>
+                                    <span class="icon-star text-warning"></span>
+                                </div>
+                            </div>
+                            <ul class="specs">
+                                <li>
+                                    <span>Количество дверей</span>
+                                    <span class="spec">{{ vehicle.doors }}</span>
+                                </li>
+                                <li>
+                                    <span>Количество мест</span>
+                                    <span class="spec">{{ vehicle.seats }}</span>
+                                </li>
+                                <li>
+                                    <span>Трансмиссия</span>
+                                    <span class="spec">{{ vehicle.transmission }}</span>
+                                </li>
+                                <li>
+                                    <span>Минимальный возвраст</span>
+                                    <span class="spec">{{ vehicle.minimum_age }}</span>
+                                </li>
+                            </ul>
+                            <div class="d-flex action">
+                                <a href="{% url 'contact' %}" class="btn btn-primary">Купить</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+
+                <div class="col-12">
+                    <span class="p-3">1</span>
+                    <a href="#" class="p-3">2</a>
+                    <a href="#" class="p-3">3</a>
+                    <a href="#" class="p-3">4</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+</body>
+
+</html>
+{% endblock content %}
+

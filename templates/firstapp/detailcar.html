@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} {{ vehicle.name }} {% endblock title %}
+{% block content %}
+
+<div id="block-option" class="cart-data_block-collumn1-row-one">
+
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+        </ol>
+        <div class="carousel-inner">
+            {% for image in vehicle.vehicleshots_set.all %}
+            <div class="carousel-item {% if forloop.first %}active {% endif %} ">
+                <img class="d-block w-100" src="{{ image.image.url }}" alt="First slide">
+            </div>
+<!--            <div class="main-slider-home__img-wrp"><img src="{{ image.image.url }}" loading="lazy" alt="" class="main-slider-home__img main-slider-home__img2"></div>-->
+            {% endfor %}
+
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <img src="https://uploads-ssl.webflow.com/5ff58899b60a9e46e0b10859/607d674647737e196d8304d3_prev.svg">
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <img src="https://uploads-ssl.webflow.com/5ff58899b60a9e46e0b10859/607d674619c353b5d514ceda_right.svg">
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+    <div class="cart-data_block__komplect-wrp">
+        <div class="cart-data_block__komplect-tilte_wrp cart-data_block__komplect-tilte_wrp--cart">
+            <div class="cart-data_block__komplect-tilte cart-data_block__komplect-tilte_mr">{{ vehicle.name }}</div>
+        </div>
+        <div class="cart-data_block__komplect-character_wrp">
+            {% for c in vehicle.character.all %}
+
+            <div class="circle-blue circle-blue--ml"></div>
+            <div data-tip-topliva="toplivo" class="cart-data_block__komplect-character_text">{{ c.character }}</div>
+            {% endfor %}
+
+        </div>
+        <div class="cart-data_block__komplect-rich-text w-richtext">
+            <p>{{ vehicle.description }}</p>
+
+        </div>
+
+        <div class="cart-data__block-options_box">
+
+            <div class="cart-data_block-collumn1-row-two_title">Экстерьер</div>
+            <div class="cart-data__block-options_wrp">
+                {% for e in vehicle.exterior.all %}
+                <div class="cart-data__block-options_item" style="display: flex;">
+                    <div class="circle-blue circle-blue--main-color circle-blue--mrt-4"></div>
+                    <div class="cart-data__block-options_item-text">
+                        {{ e.description }}
+                    </div>
+                </div>
+                {% endfor %}
+
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+{% endblock content %}

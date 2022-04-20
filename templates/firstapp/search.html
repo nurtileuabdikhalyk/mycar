@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ title }}{% endblock title %}
+{% block content %}
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+
+
+<div class="site-wrap" id="home-section">
+
+    <div class="site-mobile-menu site-navbar-target">
+        <div class="site-mobile-menu-header">
+            <div class="site-mobile-menu-close mt-3">
+                <span class="icon-close2 js-menu-toggle"></span>
+            </div>
+        </div>
+        <div class="site-mobile-menu-body"></div>
+    </div>
+    {% if object_list %}
+    {% for object in object_list %}
+    <div class="ftco-blocks-cover-1">
+        <div class="ftco-cover-1 overlay innerpage" style="background-image: url({% static 'images/b.jpg' %})">
+            <div class="container">
+                <div class="row align-items-center justify-content-center">
+                    <div class="col-lg-6 text-center">
+                        <h1>Результаты поиска по вашему запросу</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="site-section bg-light">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="item-1">
+                        <a href="#"><img src="{{ object.image.url }}" alt="Image" class="img-fluid"></a>
+                        <!-- style="width:400px; height:270px;"-->
+                        <div class="item-1-contents">
+                            <div class="text-center">
+                                <h3><a href="{% url 'detailcar' object.slug %}">{{ object.name }}</a></h3>
+                                <div class="rating">
+                                    <span class="icon-star text-warning"></span>
+                                    <span class="icon-star text-warning"></span>
+                                    <span class="icon-star text-warning"></span>
+                                    <span class="icon-star text-warning"></span>
+                                    <span class="icon-star text-warning"></span>
+                                </div>
+                            </div>
+                            <ul class="specs">
+                                <li>
+                                    <span>Количество дверей</span>
+                                    <span class="spec">{{ object.doors }}</span>
+                                </li>
+                                <li>
+                                    <span>Количество мест</span>
+                                    <span class="spec">{{ object.seats }}</span>
+                                </li>
+                                <li>
+                                    <span>Трансмиссия</span>
+                                    <span class="spec">{{ object.transmission }}</span>
+                                </li>
+                                <li>
+                                    <span>Минимальный возвраст</span>
+                                    <span class="spec">{{ object.minimum_age }}</span>
+                                </li>
+                            </ul>
+                            <div class="d-flex action">
+                                <a href="contact.html" class="btn btn-primary">Rent Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <div class="ftco-blocks-cover-1">
+        <div class="ftco-cover-1 overlay innerpage" style="background-image: url({% static 'images/b.jpg' %})">
+            <div class="container">
+                <div class="row align-items-center justify-content-center">
+                    <div class="col-lg-6 text-center">
+                        <h1>Не найдено публикаций по вашему запросу</h1>
+                        <p>Попробуйте повторить запрос с другой формулировкой</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+</div>
+{% endblock content %}
+<!--{% if object_list %}-->
+<!--{% for object in object_list %}-->
+
+<!--<div>-->
+<!--    <a href="{{ object.get_absolute_url }}">-->
+<!--        <h2>{{ object.name }}</h2>-->
+<!--    </a>-->
+<!--    {{ object.description|safe }}-->
+<!--    <p><a class="btn btn-default btn-sm" href="{{ object.get_absolute_url }}">Читать далее</a></p>-->
+<!--</div>-->
+
+<!--{% endfor %}-->
+
+
+<!--{% else %}-->
+<!--<p>Не найдено публикаций по вашему запросу<br>Попробуйте повторить запрос с другой формулировкой</p>-->
+<!--{% endif %}-->
